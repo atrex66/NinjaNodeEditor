@@ -1,0 +1,108 @@
+{
+  "version": 5,
+  "global_positions": {},
+  "hal_thread": "servo-thread",
+  "modules": {
+    "0": "Main",
+    "1": "Control"
+  },
+  "view_module": 1,
+  "nodes": {
+    "1": {
+      "kind": "input",
+      "pos": [
+        0,
+        0
+      ],
+      "p": {
+        "name": "machine-enabled",
+        "dtype": "bit",
+        "invert": false,
+        "edge": "level",
+        "debounce": 0.0,
+        "on_delay": 0.0,
+        "off_delay": 0.0,
+        "initial": false,
+        "value": 0.0,
+        "expression": "x",
+        "global_io": true,
+        "hal_binding": {
+          "kind": "pin",
+          "name": "motion.enabled",
+          "dtype": "bit",
+          "signal": "machine-on",
+          "direction": "OUT",
+          "writers": [
+            "motion.enabled"
+          ]
+        }
+      },
+      "module": 0
+    },
+    "2": {
+      "kind": "output",
+      "pos": [
+        0,
+        0
+      ],
+      "p": {
+        "name": "machine-command",
+        "dtype": "bit",
+        "invert": false,
+        "edge": "level",
+        "debounce": 0.0,
+        "on_delay": 0.0,
+        "off_delay": 0.0,
+        "initial": false,
+        "value": 0.0,
+        "expression": "x",
+        "global_io": true,
+        "hal_binding": {
+          "kind": "pin",
+          "name": "io.command",
+          "dtype": "bit",
+          "signal": "",
+          "direction": "IN",
+          "writers": []
+        }
+      },
+      "module": 0
+    },
+    "3": {
+      "kind": "invert",
+      "pos": [
+        180,
+        0
+      ],
+      "p": {
+        "name": "invert-3",
+        "dtype": "bit",
+        "invert": false,
+        "edge": "level",
+        "debounce": 0.0,
+        "on_delay": 0.0,
+        "off_delay": 0.0,
+        "initial": false,
+        "value": 0.0,
+        "expression": "x",
+        "global_io": false,
+        "hal_binding": null
+      },
+      "module": 1
+    }
+  },
+  "links": [
+    [
+      1,
+      "out",
+      3,
+      "in"
+    ],
+    [
+      3,
+      "out",
+      2,
+      "in"
+    ]
+  ]
+}

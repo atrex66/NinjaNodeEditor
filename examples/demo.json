@@ -1,0 +1,125 @@
+{
+  "version": 2,
+  "nodes": {
+    "1": {
+      "kind": "input",
+      "pos": [
+        20,
+        20
+      ],
+      "p": {
+        "name": "pressure",
+        "dtype": "float",
+        "invert": false,
+        "edge": "level",
+        "debounce": 0.0,
+        "on_delay": 0.0,
+        "off_delay": 0.0,
+        "initial": false,
+        "value": 4.0,
+        "expression": "x"
+      }
+    },
+    "2": {
+      "kind": "math",
+      "pos": [
+        260,
+        20
+      ],
+      "p": {
+        "name": "math-2",
+        "dtype": "bit",
+        "invert": false,
+        "edge": "level",
+        "debounce": 0.0,
+        "on_delay": 0.0,
+        "off_delay": 0.0,
+        "initial": false,
+        "value": 0.0,
+        "expression": "pressure * scale",
+        "variables": {
+          "pressure": {
+            "dtype": "float",
+            "mode": "port",
+            "value": 0.0
+          },
+          "scale": {
+            "dtype": "float",
+            "mode": "constant",
+            "value": 2.0
+          }
+        }
+      }
+    },
+    "3": {
+      "kind": "condition",
+      "pos": [
+        20,
+        220
+      ],
+      "p": {
+        "name": "condition-3",
+        "dtype": "bit",
+        "invert": false,
+        "edge": "level",
+        "debounce": 0.0,
+        "on_delay": 0.0,
+        "off_delay": 0.0,
+        "initial": false,
+        "value": 0.0,
+        "expression": "pressure >= minimum",
+        "variables": {
+          "pressure": {
+            "dtype": "float",
+            "mode": "port",
+            "value": 0.0
+          },
+          "minimum": {
+            "dtype": "float",
+            "mode": "constant",
+            "value": 5.0
+          }
+        }
+      }
+    },
+    "4": {
+      "kind": "output",
+      "pos": [
+        260,
+        220
+      ],
+      "p": {
+        "name": "pump",
+        "dtype": "bit",
+        "invert": false,
+        "edge": "level",
+        "debounce": 0.0,
+        "on_delay": 200.0,
+        "off_delay": 1000.0,
+        "initial": false,
+        "value": 0.0,
+        "expression": "x"
+      }
+    }
+  },
+  "links": [
+    [
+      1,
+      "out",
+      2,
+      "pressure"
+    ],
+    [
+      2,
+      "result",
+      3,
+      "pressure"
+    ],
+    [
+      3,
+      "true",
+      4,
+      "in"
+    ]
+  ]
+}

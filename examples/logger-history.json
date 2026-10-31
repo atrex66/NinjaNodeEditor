@@ -1,0 +1,115 @@
+{
+  "version": 4,
+  "modules": {
+    "0": "Main"
+  },
+  "view_module": 0,
+  "nodes": {
+    "1": {
+      "kind": "input",
+      "pos": [
+        0,
+        0
+      ],
+      "p": {
+        "name": "position",
+        "dtype": "u32",
+        "invert": false,
+        "edge": "level",
+        "debounce": 0.0,
+        "on_delay": 0.0,
+        "off_delay": 0.0,
+        "initial": false,
+        "value": 123,
+        "expression": "x"
+      },
+      "module": 0
+    },
+    "2": {
+      "kind": "input",
+      "pos": [
+        0,
+        155
+      ],
+      "p": {
+        "name": "velocity",
+        "dtype": "float",
+        "invert": false,
+        "edge": "level",
+        "debounce": 0.0,
+        "on_delay": 0.0,
+        "off_delay": 0.0,
+        "initial": false,
+        "value": 1.2345,
+        "expression": "x"
+      },
+      "module": 0
+    },
+    "3": {
+      "kind": "input",
+      "pos": [
+        0,
+        315
+      ],
+      "p": {
+        "name": "save-log",
+        "dtype": "bit",
+        "invert": false,
+        "edge": "level",
+        "debounce": 0.0,
+        "on_delay": 0.0,
+        "off_delay": 0.0,
+        "initial": false,
+        "value": 0.0,
+        "expression": "x"
+      },
+      "module": 0
+    },
+    "4": {
+      "kind": "logger",
+      "pos": [
+        300,
+        90
+      ],
+      "p": {
+        "name": "logger-4",
+        "dtype": "bit",
+        "invert": false,
+        "edge": "level",
+        "debounce": 0.0,
+        "on_delay": 0.0,
+        "off_delay": 0.0,
+        "initial": false,
+        "value": 0.0,
+        "expression": "x",
+        "input_count": 2,
+        "buffer_length": 100,
+        "sample_ms": 20,
+        "filename": "logs/history-{timestamp}.csv",
+        "file_format": "csv",
+        "number_format": ".10g"
+      },
+      "module": 0
+    }
+  },
+  "links": [
+    [
+      1,
+      "out",
+      4,
+      "in1"
+    ],
+    [
+      2,
+      "out",
+      4,
+      "in2"
+    ],
+    [
+      3,
+      "out",
+      4,
+      "trigger"
+    ]
+  ]
+}

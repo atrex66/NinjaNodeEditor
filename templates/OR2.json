@@ -1,0 +1,19 @@
+{
+  "format": "plc-math-template",
+  "version": 1,
+  "expression": "a or b",
+  "dtype": "bit",
+  "variables": {
+    "a": {
+      "dtype": "bit",
+      "mode": "port",
+      "value": 0.0
+    },
+    "b": {
+      "dtype": "bit",
+      "mode": "port",
+      "value": 0.0
+    }
+  },
+  "title": "OR2"
+}

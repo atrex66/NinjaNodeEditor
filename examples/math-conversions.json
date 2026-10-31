@@ -1,0 +1,140 @@
+{
+  "version": 3,
+  "nodes": {
+    "1": {
+      "kind": "input",
+      "pos": [
+        0,
+        0
+      ],
+      "p": {
+        "name": "measurement",
+        "dtype": "float",
+        "invert": false,
+        "edge": "level",
+        "debounce": 0.0,
+        "on_delay": 0.0,
+        "off_delay": 0.0,
+        "initial": false,
+        "value": -3.9,
+        "expression": "x"
+      }
+    },
+    "2": {
+      "kind": "math",
+      "pos": [
+        270,
+        0
+      ],
+      "p": {
+        "name": "math-2",
+        "dtype": "u32",
+        "invert": false,
+        "edge": "level",
+        "debounce": 0.0,
+        "on_delay": 0.0,
+        "off_delay": 0.0,
+        "initial": false,
+        "value": 0.0,
+        "expression": "sqrt(x^2) + sin(pi/2)",
+        "variables": {
+          "x": {
+            "dtype": "s32",
+            "mode": "port",
+            "value": 0.0
+          }
+        }
+      }
+    },
+    "3": {
+      "kind": "output",
+      "pos": [
+        540,
+        0
+      ],
+      "p": {
+        "name": "float-result",
+        "dtype": "float",
+        "invert": false,
+        "edge": "level",
+        "debounce": 0.0,
+        "on_delay": 0.0,
+        "off_delay": 0.0,
+        "initial": false,
+        "value": 0.0,
+        "expression": "x"
+      }
+    },
+    "4": {
+      "kind": "math",
+      "pos": [
+        270,
+        210
+      ],
+      "p": {
+        "name": "math-4",
+        "dtype": "s32",
+        "invert": false,
+        "edge": "level",
+        "debounce": 0.0,
+        "on_delay": 0.0,
+        "off_delay": 0.0,
+        "initial": false,
+        "value": 0.0,
+        "expression": "x * 2",
+        "variables": {
+          "x": {
+            "dtype": "float",
+            "mode": "port",
+            "value": 0.0
+          }
+        }
+      }
+    },
+    "5": {
+      "kind": "output",
+      "pos": [
+        540,
+        210
+      ],
+      "p": {
+        "name": "unsigned-result",
+        "dtype": "u32",
+        "invert": false,
+        "edge": "level",
+        "debounce": 0.0,
+        "on_delay": 0.0,
+        "off_delay": 0.0,
+        "initial": false,
+        "value": 0.0,
+        "expression": "x"
+      }
+    }
+  },
+  "links": [
+    [
+      1,
+      "out",
+      2,
+      "x"
+    ],
+    [
+      2,
+      "result",
+      3,
+      "in"
+    ],
+    [
+      1,
+      "out",
+      4,
+      "x"
+    ],
+    [
+      4,
+      "result",
+      5,
+      "in"
+    ]
+  ]
+}

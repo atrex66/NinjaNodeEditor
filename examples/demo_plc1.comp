@@ -1,0 +1,33 @@
+component demo_plc1 "Local node PLC prototype";
+option singleton yes;
+license "MIT";
+pin in float pressure;
+pin in float scale;
+pin out bit pump;
+function update;
+;;
+#ifndef pump_set
+#define pump_set(...) (pump = (__VA_ARGS__))
+#endif
+#include <math.h>
+static double lpn_div(double a,double b){return fabs(b)>1e-12?a/b:0.0;}
+static double lpn_clamp(double x,double l,double h){return fmin(fmax(x,l),h);}
+FUNCTION(update) {
+  double lpn_dt = period * 1e-9;
+  double lpn_n1; /* input: node 1 */
+  lpn_n1 = pressure;
+  double lpn_n5; /* input: node 5 */
+  lpn_n5 = scale;
+  double lpn_n2; /* math: node 2 */
+  lpn_n2 = ((lpn_n1 * lpn_n5));
+  double lpn_n3; /* condition: node 3 */
+  lpn_n3 = !!(((lpn_n2 >= 5.0)));
+  double lpn_n4; /* output: node 4 */
+  static int lpn_out4=0;
+  static double lpn_elapsed4=0;
+  int lpn_wanted4=!!(lpn_n3);
+  lpn_elapsed4=lpn_wanted4!=lpn_out4?lpn_elapsed4+lpn_dt:0;
+  if(lpn_wanted4!=lpn_out4 && lpn_elapsed4>=(lpn_wanted4?0.2:1.0)) {lpn_out4=lpn_wanted4;lpn_elapsed4=0;}
+  lpn_n4=lpn_out4 ^ 0;
+  pump_set(lpn_n4);
+}

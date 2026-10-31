@@ -1,0 +1,187 @@
+{
+  "version": 3,
+  "nodes": {
+    "1": {
+      "kind": "input",
+      "pos": [
+        0,
+        0
+      ],
+      "p": {
+        "name": "target",
+        "dtype": "float",
+        "invert": false,
+        "edge": "level",
+        "debounce": 0.0,
+        "on_delay": 0.0,
+        "off_delay": 0.0,
+        "initial": false,
+        "value": 10,
+        "expression": "x"
+      }
+    },
+    "2": {
+      "kind": "input",
+      "pos": [
+        0,
+        145
+      ],
+      "p": {
+        "name": "measured",
+        "dtype": "float",
+        "invert": false,
+        "edge": "level",
+        "debounce": 0.0,
+        "on_delay": 0.0,
+        "off_delay": 0.0,
+        "initial": false,
+        "value": 7,
+        "expression": "x"
+      }
+    },
+    "3": {
+      "kind": "input",
+      "pos": [
+        0,
+        290
+      ],
+      "p": {
+        "name": "enabled",
+        "dtype": "bit",
+        "invert": false,
+        "edge": "level",
+        "debounce": 0.0,
+        "on_delay": 0.0,
+        "off_delay": 0.0,
+        "initial": false,
+        "value": 1,
+        "expression": "x"
+      }
+    },
+    "4": {
+      "kind": "input",
+      "pos": [
+        0,
+        435
+      ],
+      "p": {
+        "name": "reset",
+        "dtype": "bit",
+        "invert": false,
+        "edge": "level",
+        "debounce": 0.0,
+        "on_delay": 0.0,
+        "off_delay": 0.0,
+        "initial": false,
+        "value": 0,
+        "expression": "x"
+      }
+    },
+    "5": {
+      "kind": "pid",
+      "pos": [
+        270,
+        100
+      ],
+      "p": {
+        "name": "pid-5",
+        "dtype": "float",
+        "invert": false,
+        "edge": "level",
+        "debounce": 0.0,
+        "on_delay": 0.0,
+        "off_delay": 0.0,
+        "initial": false,
+        "value": 0.0,
+        "expression": "x",
+        "kp": 2,
+        "ki": 0.5,
+        "kd": 0.1,
+        "output_min": -100,
+        "output_max": 100,
+        "filter_ms": 20,
+        "setpoint": 0.0,
+        "feedback": 0.0,
+        "enabled": true,
+        "ff_enabled": true,
+        "ff_gain": 0.8
+      }
+    },
+    "6": {
+      "kind": "output",
+      "pos": [
+        540,
+        80
+      ],
+      "p": {
+        "name": "control-output",
+        "dtype": "float",
+        "invert": false,
+        "edge": "level",
+        "debounce": 0.0,
+        "on_delay": 0.0,
+        "off_delay": 0.0,
+        "initial": false,
+        "value": 0.0,
+        "expression": "x"
+      }
+    },
+    "7": {
+      "kind": "output",
+      "pos": [
+        540,
+        250
+      ],
+      "p": {
+        "name": "control-error",
+        "dtype": "float",
+        "invert": false,
+        "edge": "level",
+        "debounce": 0.0,
+        "on_delay": 0.0,
+        "off_delay": 0.0,
+        "initial": false,
+        "value": 0.0,
+        "expression": "x"
+      }
+    }
+  },
+  "links": [
+    [
+      1,
+      "out",
+      5,
+      "setpoint"
+    ],
+    [
+      2,
+      "out",
+      5,
+      "feedback"
+    ],
+    [
+      3,
+      "out",
+      5,
+      "enable"
+    ],
+    [
+      4,
+      "out",
+      5,
+      "reset"
+    ],
+    [
+      5,
+      "out",
+      6,
+      "in"
+    ],
+    [
+      5,
+      "error",
+      7,
+      "in"
+    ]
+  ]
+}

@@ -1,0 +1,87 @@
+component invert "Local node PLC prototype";
+option singleton yes;
+license "MIT";
+pin in bit input-1;
+pin in bit input-5;
+pin in bit input-6;
+pin out bit output-1;
+pin out bit output-7;
+function update;
+;;
+#ifndef output_1_set
+#define output_1_set(...) (output_1 = (__VA_ARGS__))
+#endif
+#ifndef output_7_set
+#define output_7_set(...) (output_7 = (__VA_ARGS__))
+#endif
+#include <math.h>
+static double lpn_div(double a,double b){return fabs(b)>1e-12?a/b:0.0;}
+static double lpn_mod(double a,double b){if(fabs(b)<=1e-12 || !isfinite(a) || !isfinite(b))return 0.0;double r=fmod(a,b);return r!=0.0 && ((r<0.0)!=(b<0.0))?r+b:r;}
+static double lpn_s32(double x){return isfinite(x)?trunc(fmin(fmax(x,-2147483648.0),2147483647.0)):0.0;}
+static double lpn_u32(double x){return isfinite(x)?trunc(fmin(fmax(x,0.0),4294967295.0)):0.0;}
+static double lpn_clamp(double x,double l,double h){return fmin(fmax(x,l),h);}
+static double lpn_math_abs(double a){if(!isfinite(a))return 0.0;double r=fabs(a);return isfinite(r)?r:0.0;}
+static double lpn_math_min(double a,double b){if(!isfinite(a) || !isfinite(b))return 0.0;double r=fmin(a,b);return isfinite(r)?r:0.0;}
+static double lpn_math_max(double a,double b){if(!isfinite(a) || !isfinite(b))return 0.0;double r=fmax(a,b);return isfinite(r)?r:0.0;}
+static double lpn_math_clamp(double a,double b,double c){if(!isfinite(a) || !isfinite(b) || !isfinite(c))return 0.0;double r=lpn_clamp(a,b,c);return isfinite(r)?r:0.0;}
+static double lpn_math_pow(double a,double b){if(!isfinite(a) || !isfinite(b))return 0.0;double r=pow(a,b);return isfinite(r)?r:0.0;}
+static double lpn_math_sqrt(double a){if(!isfinite(a))return 0.0;double r=sqrt(a);return isfinite(r)?r:0.0;}
+static double lpn_math_sin(double a){if(!isfinite(a))return 0.0;double r=sin(a);return isfinite(r)?r:0.0;}
+static double lpn_math_cos(double a){if(!isfinite(a))return 0.0;double r=cos(a);return isfinite(r)?r:0.0;}
+static double lpn_math_tan(double a){if(!isfinite(a))return 0.0;double r=tan(a);return isfinite(r)?r:0.0;}
+static double lpn_math_asin(double a){if(!isfinite(a))return 0.0;double r=asin(a);return isfinite(r)?r:0.0;}
+static double lpn_math_acos(double a){if(!isfinite(a))return 0.0;double r=acos(a);return isfinite(r)?r:0.0;}
+static double lpn_math_atan(double a){if(!isfinite(a))return 0.0;double r=atan(a);return isfinite(r)?r:0.0;}
+static double lpn_math_atan2(double a,double b){if(!isfinite(a) || !isfinite(b))return 0.0;double r=atan2(a,b);return isfinite(r)?r:0.0;}
+static double lpn_math_log(double a){if(!isfinite(a))return 0.0;double r=log(a);return isfinite(r)?r:0.0;}
+static double lpn_math_log10(double a){if(!isfinite(a))return 0.0;double r=log10(a);return isfinite(r)?r:0.0;}
+static double lpn_math_exp(double a){if(!isfinite(a))return 0.0;double r=exp(a);return isfinite(r)?r:0.0;}
+static double lpn_math_floor(double a){if(!isfinite(a))return 0.0;double r=floor(a);return isfinite(r)?r:0.0;}
+static double lpn_math_ceil(double a){if(!isfinite(a))return 0.0;double r=ceil(a);return isfinite(r)?r:0.0;}
+FUNCTION(update) {
+  double lpn_dt = period * 1e-9;
+  double lpn_n1; /* input: node 1 */
+  static int lpn_stable1=0, lpn_prev1=0;
+  static double lpn_elapsed1=0;
+  int lpn_raw1 = (!!input_1) ^ 0;
+  lpn_elapsed1 = lpn_raw1 != lpn_stable1 ? lpn_elapsed1+lpn_dt : 0;
+  if(lpn_raw1 != lpn_stable1 && lpn_elapsed1 >= 0.0) {lpn_stable1=lpn_raw1; lpn_elapsed1=0;}
+  lpn_n1 = lpn_stable1;
+  lpn_prev1 = lpn_stable1;
+  double lpn_n5; /* input: node 5 */
+  static int lpn_stable5=0, lpn_prev5=0;
+  static double lpn_elapsed5=0;
+  int lpn_raw5 = (!!input_5) ^ 0;
+  lpn_elapsed5 = lpn_raw5 != lpn_stable5 ? lpn_elapsed5+lpn_dt : 0;
+  if(lpn_raw5 != lpn_stable5 && lpn_elapsed5 >= 0.0) {lpn_stable5=lpn_raw5; lpn_elapsed5=0;}
+  lpn_n5 = lpn_stable5;
+  lpn_prev5 = lpn_stable5;
+  double lpn_n6; /* input: node 6 */
+  static int lpn_stable6=0, lpn_prev6=0;
+  static double lpn_elapsed6=0;
+  int lpn_raw6 = (!!input_6) ^ 0;
+  lpn_elapsed6 = lpn_raw6 != lpn_stable6 ? lpn_elapsed6+lpn_dt : 0;
+  if(lpn_raw6 != lpn_stable6 && lpn_elapsed6 >= 0.0) {lpn_stable6=lpn_raw6; lpn_elapsed6=0;}
+  lpn_n6 = lpn_stable6;
+  lpn_prev6 = lpn_stable6;
+  double lpn_n2; /* invert: node 2 */
+  lpn_n2 = !(lpn_n1);
+  double lpn_n4; /* math: node 4 */
+  lpn_n4 = !!((!!(lpn_n5) && !!(lpn_n6)));
+  double lpn_n3; /* output: node 3 */
+  static int lpn_out3=0;
+  static double lpn_elapsed3=0;
+  int lpn_wanted3=!!(lpn_n2);
+  lpn_elapsed3=lpn_wanted3!=lpn_out3?lpn_elapsed3+lpn_dt:0;
+  if(lpn_wanted3!=lpn_out3 && lpn_elapsed3>=(lpn_wanted3?0.0:0.0)) {lpn_out3=lpn_wanted3;lpn_elapsed3=0;}
+  lpn_n3=lpn_out3 ^ 0;
+  output_1_set(lpn_n3);
+  double lpn_n7; /* output: node 7 */
+  static int lpn_out7=0;
+  static double lpn_elapsed7=0;
+  int lpn_wanted7=!!(lpn_n4);
+  lpn_elapsed7=lpn_wanted7!=lpn_out7?lpn_elapsed7+lpn_dt:0;
+  if(lpn_wanted7!=lpn_out7 && lpn_elapsed7>=(lpn_wanted7?0.0:0.0)) {lpn_out7=lpn_wanted7;lpn_elapsed7=0;}
+  lpn_n7=lpn_out7 ^ 0;
+  output_7_set(lpn_n7);
+}

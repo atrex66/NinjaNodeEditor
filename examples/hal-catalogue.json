@@ -1,0 +1,35 @@
+{
+  "format": "NinjaNodeEditor HAL catalogue",
+  "version": 1,
+  "pins": [
+    {
+      "name": "motion.enabled",
+      "dtype": "bit",
+      "direction": "OUT",
+      "value": 1.0,
+      "owner": "motion",
+      "signal": "machine-on"
+    },
+    {
+      "name": "io.command",
+      "dtype": "bit",
+      "direction": "IN",
+      "value": 0.0,
+      "owner": "io",
+      "signal": ""
+    }
+  ],
+  "signals": [
+    {
+      "name": "machine-on",
+      "dtype": "bit",
+      "value": 1.0,
+      "pins": [
+        {
+          "name": "motion.enabled",
+          "direction": "OUT"
+        }
+      ]
+    }
+  ]
+}

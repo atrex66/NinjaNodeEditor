@@ -1,0 +1,120 @@
+{
+  "version": 3,
+  "nodes": {
+    "1": {
+      "kind": "input",
+      "pos": [
+        0,
+        0
+      ],
+      "p": {
+        "name": "position",
+        "dtype": "u32",
+        "invert": false,
+        "edge": "level",
+        "debounce": 0.0,
+        "on_delay": 0.0,
+        "off_delay": 0.0,
+        "initial": false,
+        "value": 12,
+        "expression": "x"
+      }
+    },
+    "2": {
+      "kind": "fifo",
+      "pos": [
+        270,
+        0
+      ],
+      "p": {
+        "name": "fifo-2",
+        "dtype": "float",
+        "invert": false,
+        "edge": "level",
+        "debounce": 0.0,
+        "on_delay": 0.0,
+        "off_delay": 0.0,
+        "initial": 0.0,
+        "value": 0.0,
+        "expression": "x"
+      }
+    },
+    "3": {
+      "kind": "math",
+      "pos": [
+        540,
+        0
+      ],
+      "p": {
+        "name": "math-3",
+        "dtype": "float",
+        "invert": false,
+        "edge": "level",
+        "debounce": 0.0,
+        "on_delay": 0.0,
+        "off_delay": 0.0,
+        "initial": false,
+        "value": 0.0,
+        "expression": "now - last",
+        "template_name": "Sample difference",
+        "variables": {
+          "now": {
+            "dtype": "u32",
+            "mode": "port",
+            "value": 0.0
+          },
+          "last": {
+            "dtype": "u32",
+            "mode": "port",
+            "value": 0.0
+          }
+        }
+      }
+    },
+    "4": {
+      "kind": "output",
+      "pos": [
+        540,
+        190
+      ],
+      "p": {
+        "name": "difference",
+        "dtype": "float",
+        "invert": false,
+        "edge": "level",
+        "debounce": 0.0,
+        "on_delay": 0.0,
+        "off_delay": 0.0,
+        "initial": false,
+        "value": 0.0,
+        "expression": "x"
+      }
+    }
+  },
+  "links": [
+    [
+      1,
+      "out",
+      2,
+      "in"
+    ],
+    [
+      2,
+      "last",
+      3,
+      "last"
+    ],
+    [
+      2,
+      "now",
+      3,
+      "now"
+    ],
+    [
+      3,
+      "result",
+      4,
+      "in"
+    ]
+  ]
+}

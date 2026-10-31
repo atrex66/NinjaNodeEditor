@@ -1,0 +1,467 @@
+{
+  "version": 3,
+  "nodes": {
+    "2": {
+      "kind": "input",
+      "pos": [
+        -374.4689906971728,
+        -107.87366085801777
+      ],
+      "p": {
+        "name": "target-position",
+        "dtype": "u32",
+        "invert": false,
+        "edge": "level",
+        "debounce": 0.0,
+        "on_delay": 0.0,
+        "off_delay": 0.0,
+        "initial": false,
+        "value": 5.0,
+        "expression": "x"
+      }
+    },
+    "3": {
+      "kind": "math",
+      "pos": [
+        275.4062485754125,
+        33.671387880113116
+      ],
+      "p": {
+        "name": "math-3",
+        "dtype": "float",
+        "invert": false,
+        "edge": "level",
+        "debounce": 0.0,
+        "on_delay": 0.0,
+        "off_delay": 0.0,
+        "initial": false,
+        "value": 0.0,
+        "expression": "((target - actual + stations / 2) % stations + stations) % stations - stations / 2",
+        "variables": {
+          "target": {
+            "dtype": "u32",
+            "mode": "port",
+            "value": 0.0
+          },
+          "actual": {
+            "dtype": "u32",
+            "mode": "port",
+            "value": 0.0
+          },
+          "stations": {
+            "dtype": "u32",
+            "mode": "constant",
+            "value": 12
+          }
+        },
+        "template_name": ""
+      }
+    },
+    "4": {
+      "kind": "condition",
+      "pos": [
+        540.0,
+        0.0
+      ],
+      "p": {
+        "name": "condition-4",
+        "dtype": "bit",
+        "invert": false,
+        "edge": "level",
+        "debounce": 0.0,
+        "on_delay": 0.0,
+        "off_delay": 0.0,
+        "initial": false,
+        "value": 0.0,
+        "expression": "delta == 0",
+        "variables": {
+          "delta": {
+            "dtype": "float",
+            "mode": "port",
+            "value": 0.0
+          }
+        }
+      }
+    },
+    "5": {
+      "kind": "invert",
+      "pos": [
+        847.8169053234501,
+        6.456544811320754
+      ],
+      "p": {
+        "name": "invert-5",
+        "dtype": "bit",
+        "invert": false,
+        "edge": "level",
+        "debounce": 0.0,
+        "on_delay": 0.0,
+        "off_delay": 0.0,
+        "initial": false,
+        "value": 0.0,
+        "expression": "x"
+      }
+    },
+    "6": {
+      "kind": "condition",
+      "pos": [
+        540.0,
+        180.0
+      ],
+      "p": {
+        "name": "condition-6",
+        "dtype": "bit",
+        "invert": false,
+        "edge": "level",
+        "debounce": 0.0,
+        "on_delay": 0.0,
+        "off_delay": 0.0,
+        "initial": false,
+        "value": 0.0,
+        "expression": "delta > 0",
+        "variables": {
+          "delta": {
+            "dtype": "float",
+            "mode": "port",
+            "value": 0.0
+          }
+        }
+      }
+    },
+    "7": {
+      "kind": "condition",
+      "pos": [
+        1178.9454177897576,
+        60.53073618598384
+      ],
+      "p": {
+        "name": "condition-7",
+        "dtype": "bit",
+        "invert": false,
+        "edge": "level",
+        "debounce": 0.0,
+        "on_delay": 0.0,
+        "off_delay": 0.0,
+        "initial": false,
+        "value": 0.0,
+        "expression": "moving and positive",
+        "variables": {
+          "moving": {
+            "dtype": "bit",
+            "mode": "port",
+            "value": 0.0
+          },
+          "positive": {
+            "dtype": "bit",
+            "mode": "port",
+            "value": 0.0
+          }
+        }
+      }
+    },
+    "8": {
+      "kind": "condition",
+      "pos": [
+        1192.7808709568733,
+        235.14255390835586
+      ],
+      "p": {
+        "name": "condition-8",
+        "dtype": "bit",
+        "invert": false,
+        "edge": "level",
+        "debounce": 0.0,
+        "on_delay": 0.0,
+        "off_delay": 0.0,
+        "initial": false,
+        "value": 0.0,
+        "expression": "moving and negative",
+        "variables": {
+          "moving": {
+            "dtype": "bit",
+            "mode": "port",
+            "value": 0.0
+          },
+          "negative": {
+            "dtype": "bit",
+            "mode": "port",
+            "value": 0.0
+          }
+        }
+      }
+    },
+    "9": {
+      "kind": "output",
+      "pos": [
+        844.7972961590299,
+        -178.01616408355792
+      ],
+      "p": {
+        "name": "at-position",
+        "dtype": "bit",
+        "invert": false,
+        "edge": "level",
+        "debounce": 0.0,
+        "on_delay": 0.0,
+        "off_delay": 0.0,
+        "initial": false,
+        "value": 0.0,
+        "expression": "x"
+      }
+    },
+    "10": {
+      "kind": "output",
+      "pos": [
+        1536.569954514825,
+        -11.705618261455498
+      ],
+      "p": {
+        "name": "motor-cw",
+        "dtype": "bit",
+        "invert": false,
+        "edge": "level",
+        "debounce": 0.0,
+        "on_delay": 0.0,
+        "off_delay": 0.0,
+        "initial": false,
+        "value": 0.0,
+        "expression": "x"
+      }
+    },
+    "11": {
+      "kind": "output",
+      "pos": [
+        1543.0264993261458,
+        232.859829851752
+      ],
+      "p": {
+        "name": "motor-ccw",
+        "dtype": "bit",
+        "invert": false,
+        "edge": "level",
+        "debounce": 0.0,
+        "on_delay": 0.0,
+        "off_delay": 0.0,
+        "initial": false,
+        "value": 0.0,
+        "expression": "x"
+      }
+    },
+    "12": {
+      "kind": "math",
+      "pos": [
+        -15.773454951196882,
+        125.70307870090625
+      ],
+      "p": {
+        "name": "math-12",
+        "dtype": "u32",
+        "invert": false,
+        "edge": "level",
+        "debounce": 0.0,
+        "on_delay": 0.0,
+        "off_delay": 0.0,
+        "initial": false,
+        "value": 0.0,
+        "expression": "n0 * 1 + n1 * 2 + n2 * 4 + n3 * 8",
+        "template_name": "4 bit \u2192 U32",
+        "variables": {
+          "n0": {
+            "dtype": "bit",
+            "mode": "port",
+            "value": 0.0
+          },
+          "n1": {
+            "dtype": "bit",
+            "mode": "port",
+            "value": 0.0
+          },
+          "n2": {
+            "dtype": "bit",
+            "mode": "port",
+            "value": 0.0
+          },
+          "n3": {
+            "dtype": "bit",
+            "mode": "port",
+            "value": 0.0
+          }
+        }
+      }
+    },
+    "13": {
+      "kind": "input",
+      "pos": [
+        -371.2342987845687,
+        29.742166487334373
+      ],
+      "p": {
+        "name": "input-13",
+        "dtype": "bit",
+        "invert": false,
+        "edge": "level",
+        "debounce": 0.0,
+        "on_delay": 0.0,
+        "off_delay": 0.0,
+        "initial": false,
+        "value": 0.0,
+        "expression": "x"
+      }
+    },
+    "14": {
+      "kind": "input",
+      "pos": [
+        -367.1796123530093,
+        159.49213229723432
+      ],
+      "p": {
+        "name": "input-14",
+        "dtype": "bit",
+        "invert": false,
+        "edge": "level",
+        "debounce": 0.0,
+        "on_delay": 0.0,
+        "off_delay": 0.0,
+        "initial": false,
+        "value": 1.0,
+        "expression": "x"
+      }
+    },
+    "15": {
+      "kind": "input",
+      "pos": [
+        -363.1249259214499,
+        293.2967845386937
+      ],
+      "p": {
+        "name": "input-15",
+        "dtype": "bit",
+        "invert": false,
+        "edge": "level",
+        "debounce": 0.0,
+        "on_delay": 0.0,
+        "off_delay": 0.0,
+        "initial": false,
+        "value": 1.0,
+        "expression": "x"
+      }
+    },
+    "16": {
+      "kind": "input",
+      "pos": [
+        -361.7733637775968,
+        424.39831249244673
+      ],
+      "p": {
+        "name": "input-16",
+        "dtype": "bit",
+        "invert": false,
+        "edge": "level",
+        "debounce": 0.0,
+        "on_delay": 0.0,
+        "off_delay": 0.0,
+        "initial": false,
+        "value": 0.0,
+        "expression": "x"
+      }
+    }
+  },
+  "links": [
+    [
+      2,
+      "out",
+      3,
+      "target"
+    ],
+    [
+      3,
+      "result",
+      4,
+      "delta"
+    ],
+    [
+      4,
+      "true",
+      5,
+      "in"
+    ],
+    [
+      3,
+      "result",
+      6,
+      "delta"
+    ],
+    [
+      5,
+      "out",
+      7,
+      "moving"
+    ],
+    [
+      6,
+      "true",
+      7,
+      "positive"
+    ],
+    [
+      5,
+      "out",
+      8,
+      "moving"
+    ],
+    [
+      6,
+      "false",
+      8,
+      "negative"
+    ],
+    [
+      4,
+      "true",
+      9,
+      "in"
+    ],
+    [
+      7,
+      "true",
+      10,
+      "in"
+    ],
+    [
+      8,
+      "true",
+      11,
+      "in"
+    ],
+    [
+      12,
+      "result",
+      3,
+      "actual"
+    ],
+    [
+      13,
+      "out",
+      12,
+      "n0"
+    ],
+    [
+      14,
+      "out",
+      12,
+      "n1"
+    ],
+    [
+      15,
+      "out",
+      12,
+      "n2"
+    ],
+    [
+      16,
+      "out",
+      12,
+      "n3"
+    ]
+  ]
+}

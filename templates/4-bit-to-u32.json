@@ -1,0 +1,29 @@
+{
+  "format": "plc-math-template",
+  "version": 1,
+  "expression": "n0 * 1 + n1 * 2 + n2 * 4 + n3 * 8",
+  "dtype": "u32",
+  "variables": {
+    "n0": {
+      "dtype": "bit",
+      "mode": "port",
+      "value": 0.0
+    },
+    "n1": {
+      "dtype": "bit",
+      "mode": "port",
+      "value": 0.0
+    },
+    "n2": {
+      "dtype": "bit",
+      "mode": "port",
+      "value": 0.0
+    },
+    "n3": {
+      "dtype": "bit",
+      "mode": "port",
+      "value": 0.0
+    }
+  },
+  "title": "4 bit \u2192 U32"
+}

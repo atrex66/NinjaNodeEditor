@@ -1,0 +1,183 @@
+{
+  "version": 3,
+  "nodes": {
+    "1": {
+      "kind": "input",
+      "pos": [
+        69.55970128132253,
+        -134.69512718662128
+      ],
+      "p": {
+        "name": "input-1",
+        "dtype": "bit",
+        "invert": false,
+        "edge": "level",
+        "debounce": 0.0,
+        "on_delay": 0.0,
+        "off_delay": 0.0,
+        "initial": false,
+        "value": 0.0,
+        "expression": "x"
+      }
+    },
+    "2": {
+      "kind": "invert",
+      "pos": [
+        363.22730233706307,
+        -135.03585442018095
+      ],
+      "p": {
+        "name": "invert-2",
+        "dtype": "bit",
+        "invert": false,
+        "edge": "level",
+        "debounce": 0.0,
+        "on_delay": 0.0,
+        "off_delay": 0.0,
+        "initial": false,
+        "value": 0.0,
+        "expression": "x"
+      }
+    },
+    "3": {
+      "kind": "output",
+      "pos": [
+        658.822521524691,
+        -135.0226790105286
+      ],
+      "p": {
+        "name": "output-1",
+        "dtype": "bit",
+        "invert": false,
+        "edge": "level",
+        "debounce": 0.0,
+        "on_delay": 0.0,
+        "off_delay": 0.0,
+        "initial": false,
+        "value": 0.0,
+        "expression": "x"
+      }
+    },
+    "4": {
+      "kind": "math",
+      "pos": [
+        359.4833110905583,
+        18.14843057102577
+      ],
+      "p": {
+        "name": "math-4",
+        "dtype": "bit",
+        "invert": false,
+        "edge": "level",
+        "debounce": 0.0,
+        "on_delay": 0.0,
+        "off_delay": 0.0,
+        "initial": false,
+        "value": 0.0,
+        "expression": "a and b",
+        "template_name": "AND",
+        "variables": {
+          "a": {
+            "dtype": "bit",
+            "mode": "port",
+            "value": 0.0
+          },
+          "b": {
+            "dtype": "bit",
+            "mode": "port",
+            "value": 0.0
+          }
+        }
+      }
+    },
+    "5": {
+      "kind": "input",
+      "pos": [
+        69.11173735314418,
+        -1.1109085033945547
+      ],
+      "p": {
+        "name": "input-5",
+        "dtype": "bit",
+        "invert": false,
+        "edge": "level",
+        "debounce": 0.0,
+        "on_delay": 0.0,
+        "off_delay": 0.0,
+        "initial": false,
+        "value": 0.0,
+        "expression": "x"
+      }
+    },
+    "6": {
+      "kind": "input",
+      "pos": [
+        66.14876211092565,
+        132.22297739643847
+      ],
+      "p": {
+        "name": "input-6",
+        "dtype": "bit",
+        "invert": false,
+        "edge": "level",
+        "debounce": 0.0,
+        "on_delay": 0.0,
+        "off_delay": 0.0,
+        "initial": false,
+        "value": 0.0,
+        "expression": "x"
+      }
+    },
+    "7": {
+      "kind": "output",
+      "pos": [
+        648.373397206863,
+        37.40776964544611
+      ],
+      "p": {
+        "name": "output-7",
+        "dtype": "bit",
+        "invert": false,
+        "edge": "level",
+        "debounce": 0.0,
+        "on_delay": 0.0,
+        "off_delay": 0.0,
+        "initial": false,
+        "value": 0.0,
+        "expression": "x"
+      }
+    }
+  },
+  "links": [
+    [
+      1,
+      "out",
+      2,
+      "in"
+    ],
+    [
+      2,
+      "out",
+      3,
+      "in"
+    ],
+    [
+      5,
+      "out",
+      4,
+      "a"
+    ],
+    [
+      6,
+      "out",
+      4,
+      "b"
+    ],
+    [
+      4,
+      "result",
+      7,
+      "in"
+    ]
+  ]
+}

@@ -1,0 +1,102 @@
+{
+  "version": 5,
+  "global_positions": {},
+  "hal_thread": "servo-thread",
+  "modules": {
+    "0": "Main",
+    "1": "Stored value"
+  },
+  "view_module": 0,
+  "nodes": {
+    "1": {
+      "kind": "memory_write",
+      "pos": [
+        650,
+        0
+      ],
+      "p": {
+        "name": "memory_write-1",
+        "dtype": "float",
+        "invert": false,
+        "edge": "level",
+        "debounce": 0.0,
+        "on_delay": 0.0,
+        "off_delay": 0.0,
+        "initial": false,
+        "value": 0.0,
+        "expression": "x",
+        "global_io": false,
+        "hal_binding": null,
+        "memory": "memory1"
+      },
+      "module": 0
+    },
+    "2": {
+      "kind": "memory_read",
+      "pos": [
+        0,
+        0
+      ],
+      "p": {
+        "name": "memory_read-2",
+        "dtype": "float",
+        "invert": false,
+        "edge": "level",
+        "debounce": 0.0,
+        "on_delay": 0.0,
+        "off_delay": 0.0,
+        "initial": 0.0,
+        "value": 0.0,
+        "expression": "x",
+        "global_io": false,
+        "hal_binding": null,
+        "memory": "memory1"
+      },
+      "module": 1
+    },
+    "3": {
+      "kind": "math",
+      "pos": [
+        330,
+        0
+      ],
+      "p": {
+        "name": "math-3",
+        "dtype": "float",
+        "invert": false,
+        "edge": "level",
+        "debounce": 0.0,
+        "on_delay": 0.0,
+        "off_delay": 0.0,
+        "initial": false,
+        "value": 0.0,
+        "expression": "x + 1",
+        "global_io": false,
+        "hal_binding": null,
+        "template_name": "",
+        "variables": {
+          "x": {
+            "dtype": "float",
+            "mode": "port",
+            "value": 0.0
+          }
+        }
+      },
+      "module": 0
+    }
+  },
+  "links": [
+    [
+      2,
+      "out",
+      3,
+      "x"
+    ],
+    [
+      3,
+      "result",
+      1,
+      "in"
+    ]
+  ]
+}

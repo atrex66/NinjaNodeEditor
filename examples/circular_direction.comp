@@ -1,0 +1,68 @@
+component circular_direction "Local node PLC prototype";
+option singleton yes;
+license "MIT";
+pin in u32 actual-position;
+pin in u32 target-position;
+pin out bit at-position;
+pin out bit motor-cw;
+pin out bit motor-ccw;
+function update;
+;;
+#ifndef at_position_set
+#define at_position_set(...) (at_position = (__VA_ARGS__))
+#endif
+#ifndef motor_cw_set
+#define motor_cw_set(...) (motor_cw = (__VA_ARGS__))
+#endif
+#ifndef motor_ccw_set
+#define motor_ccw_set(...) (motor_ccw = (__VA_ARGS__))
+#endif
+#include <math.h>
+static double lpn_div(double a,double b){return fabs(b)>1e-12?a/b:0.0;}
+static double lpn_mod(double a,double b){if(fabs(b)<=1e-12 || !isfinite(a) || !isfinite(b))return 0.0;double r=fmod(a,b);return r!=0.0 && ((r<0.0)!=(b<0.0))?r+b:r;}
+static double lpn_s32(double x){return isfinite(x)?trunc(fmin(fmax(x,-2147483648.0),2147483647.0)):0.0;}
+static double lpn_u32(double x){return isfinite(x)?trunc(fmin(fmax(x,0.0),4294967295.0)):0.0;}
+static double lpn_clamp(double x,double l,double h){return fmin(fmax(x,l),h);}
+FUNCTION(update) {
+  double lpn_dt = period * 1e-9;
+  double lpn_n1; /* input: node 1 */
+  lpn_n1 = lpn_u32(actual_position);
+  double lpn_n2; /* input: node 2 */
+  lpn_n2 = lpn_u32(target_position);
+  double lpn_n3; /* math: node 3 */
+  lpn_n3 = ((lpn_mod((lpn_mod(((lpn_u32(lpn_n2) - lpn_u32(lpn_n1)) + lpn_div(lpn_u32(12.0),2.0)),lpn_u32(12.0)) + lpn_u32(12.0)),lpn_u32(12.0)) - lpn_div(lpn_u32(12.0),2.0)));
+  double lpn_n4; /* condition: node 4 */
+  lpn_n4 = !!((((lpn_n3) == 0.0)));
+  double lpn_n6; /* condition: node 6 */
+  lpn_n6 = !!((((lpn_n3) > 0.0)));
+  double lpn_n5; /* invert: node 5 */
+  lpn_n5 = !(lpn_n4);
+  double lpn_n9; /* output: node 9 */
+  static int lpn_out9=0;
+  static double lpn_elapsed9=0;
+  int lpn_wanted9=!!(lpn_n4);
+  lpn_elapsed9=lpn_wanted9!=lpn_out9?lpn_elapsed9+lpn_dt:0;
+  if(lpn_wanted9!=lpn_out9 && lpn_elapsed9>=(lpn_wanted9?0.0:0.0)) {lpn_out9=lpn_wanted9;lpn_elapsed9=0;}
+  lpn_n9=lpn_out9 ^ 0;
+  at_position_set(lpn_n9);
+  double lpn_n7; /* condition: node 7 */
+  lpn_n7 = !!((!!(lpn_n5) && !!(lpn_n6)));
+  double lpn_n8; /* condition: node 8 */
+  lpn_n8 = !!((!!(lpn_n5) && !!((!lpn_n6))));
+  double lpn_n10; /* output: node 10 */
+  static int lpn_out10=0;
+  static double lpn_elapsed10=0;
+  int lpn_wanted10=!!(lpn_n7);
+  lpn_elapsed10=lpn_wanted10!=lpn_out10?lpn_elapsed10+lpn_dt:0;
+  if(lpn_wanted10!=lpn_out10 && lpn_elapsed10>=(lpn_wanted10?0.0:0.0)) {lpn_out10=lpn_wanted10;lpn_elapsed10=0;}
+  lpn_n10=lpn_out10 ^ 0;
+  motor_cw_set(lpn_n10);
+  double lpn_n11; /* output: node 11 */
+  static int lpn_out11=0;
+  static double lpn_elapsed11=0;
+  int lpn_wanted11=!!(lpn_n8);
+  lpn_elapsed11=lpn_wanted11!=lpn_out11?lpn_elapsed11+lpn_dt:0;
+  if(lpn_wanted11!=lpn_out11 && lpn_elapsed11>=(lpn_wanted11?0.0:0.0)) {lpn_out11=lpn_wanted11;lpn_elapsed11=0;}
+  lpn_n11=lpn_out11 ^ 0;
+  motor_ccw_set(lpn_n11);
+}

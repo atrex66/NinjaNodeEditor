@@ -1,0 +1,174 @@
+{
+  "version": 3,
+  "nodes": {
+    "1": {
+      "kind": "input",
+      "pos": [
+        0,
+        0
+      ],
+      "p": {
+        "name": "bit-0",
+        "dtype": "bit",
+        "invert": false,
+        "edge": "level",
+        "debounce": 0.0,
+        "on_delay": 0.0,
+        "off_delay": 0.0,
+        "initial": false,
+        "value": 0,
+        "expression": "x"
+      }
+    },
+    "2": {
+      "kind": "input",
+      "pos": [
+        0,
+        120
+      ],
+      "p": {
+        "name": "bit-1",
+        "dtype": "bit",
+        "invert": false,
+        "edge": "level",
+        "debounce": 0.0,
+        "on_delay": 0.0,
+        "off_delay": 0.0,
+        "initial": false,
+        "value": 1,
+        "expression": "x"
+      }
+    },
+    "3": {
+      "kind": "input",
+      "pos": [
+        0,
+        240
+      ],
+      "p": {
+        "name": "bit-2",
+        "dtype": "bit",
+        "invert": false,
+        "edge": "level",
+        "debounce": 0.0,
+        "on_delay": 0.0,
+        "off_delay": 0.0,
+        "initial": false,
+        "value": 0,
+        "expression": "x"
+      }
+    },
+    "4": {
+      "kind": "input",
+      "pos": [
+        0,
+        360
+      ],
+      "p": {
+        "name": "bit-3",
+        "dtype": "bit",
+        "invert": false,
+        "edge": "level",
+        "debounce": 0.0,
+        "on_delay": 0.0,
+        "off_delay": 0.0,
+        "initial": false,
+        "value": 1,
+        "expression": "x"
+      }
+    },
+    "5": {
+      "kind": "output",
+      "pos": [
+        540,
+        150
+      ],
+      "p": {
+        "name": "packed-value",
+        "dtype": "u32",
+        "invert": false,
+        "edge": "level",
+        "debounce": 0.0,
+        "on_delay": 0.0,
+        "off_delay": 0.0,
+        "initial": false,
+        "value": 0.0,
+        "expression": "x"
+      }
+    },
+    "6": {
+      "kind": "math",
+      "pos": [
+        270,
+        120
+      ],
+      "p": {
+        "name": "math-6",
+        "dtype": "u32",
+        "invert": false,
+        "edge": "level",
+        "debounce": 0.0,
+        "on_delay": 0.0,
+        "off_delay": 0.0,
+        "initial": false,
+        "value": 0.0,
+        "expression": "n0 * 1 + n1 * 2 + n2 * 4 + n3 * 8",
+        "template_name": "4 bit \u2192 U32",
+        "variables": {
+          "n0": {
+            "dtype": "bit",
+            "mode": "port",
+            "value": 0.0
+          },
+          "n1": {
+            "dtype": "bit",
+            "mode": "port",
+            "value": 0.0
+          },
+          "n2": {
+            "dtype": "bit",
+            "mode": "port",
+            "value": 0.0
+          },
+          "n3": {
+            "dtype": "bit",
+            "mode": "port",
+            "value": 0.0
+          }
+        }
+      }
+    }
+  },
+  "links": [
+    [
+      1,
+      "out",
+      6,
+      "n0"
+    ],
+    [
+      2,
+      "out",
+      6,
+      "n1"
+    ],
+    [
+      3,
+      "out",
+      6,
+      "n2"
+    ],
+    [
+      4,
+      "out",
+      6,
+      "n3"
+    ],
+    [
+      6,
+      "result",
+      5,
+      "in"
+    ]
+  ]
+}

@@ -1,0 +1,238 @@
+{
+  "version": 5,
+  "global_positions": {},
+  "hal_thread": "servo-thread",
+  "modules": {
+    "0": "Main"
+  },
+  "view_module": 0,
+  "nodes": {
+    "1": {
+      "kind": "input",
+      "pos": [
+        0,
+        0
+      ],
+      "p": {
+        "name": "measurement",
+        "dtype": "float",
+        "invert": false,
+        "edge": "level",
+        "debounce": 0.0,
+        "on_delay": 0.0,
+        "off_delay": 0.0,
+        "initial": false,
+        "value": 0.0,
+        "expression": "x",
+        "global_io": false,
+        "hal_binding": null
+      },
+      "module": 0
+    },
+    "2": {
+      "kind": "filter",
+      "pos": [
+        350,
+        0
+      ],
+      "p": {
+        "name": "filter-2",
+        "dtype": "float",
+        "invert": false,
+        "edge": "level",
+        "debounce": 0.0,
+        "on_delay": 0.0,
+        "off_delay": 0.0,
+        "initial": 0.0,
+        "value": 0.0,
+        "expression": "x",
+        "global_io": false,
+        "hal_binding": null,
+        "filter_mode": "lowpass",
+        "tau_ms": 100.0,
+        "window": 5,
+        "enabled": true
+      },
+      "module": 0
+    },
+    "3": {
+      "kind": "ramp",
+      "pos": [
+        730,
+        0
+      ],
+      "p": {
+        "name": "ramp-3",
+        "dtype": "float",
+        "invert": false,
+        "edge": "level",
+        "debounce": 0.0,
+        "on_delay": 0.0,
+        "off_delay": 0.0,
+        "initial": 0.0,
+        "value": 0.0,
+        "expression": "x",
+        "global_io": false,
+        "hal_binding": null,
+        "rise_rate": 10.0,
+        "fall_rate": 10.0,
+        "enabled": true
+      },
+      "module": 0
+    },
+    "4": {
+      "kind": "hysteresis",
+      "pos": [
+        1110,
+        0
+      ],
+      "p": {
+        "name": "hysteresis-4",
+        "dtype": "bit",
+        "invert": false,
+        "edge": "level",
+        "debounce": 0.0,
+        "on_delay": 0.0,
+        "off_delay": 0.0,
+        "initial": false,
+        "value": 0.0,
+        "expression": "x",
+        "global_io": false,
+        "hal_binding": null,
+        "low": 0.0,
+        "high": 1.0
+      },
+      "module": 0
+    },
+    "5": {
+      "kind": "output",
+      "pos": [
+        1500,
+        0
+      ],
+      "p": {
+        "name": "above-limit",
+        "dtype": "bit",
+        "invert": false,
+        "edge": "level",
+        "debounce": 0.0,
+        "on_delay": 0.0,
+        "off_delay": 0.0,
+        "initial": false,
+        "value": 0.0,
+        "expression": "x",
+        "global_io": false,
+        "hal_binding": null
+      },
+      "module": 0
+    },
+    "6": {
+      "kind": "input",
+      "pos": [
+        0,
+        330
+      ],
+      "p": {
+        "name": "heartbeat",
+        "dtype": "bit",
+        "invert": false,
+        "edge": "level",
+        "debounce": 0.0,
+        "on_delay": 0.0,
+        "off_delay": 0.0,
+        "initial": false,
+        "value": 0.0,
+        "expression": "x",
+        "global_io": false,
+        "hal_binding": null
+      },
+      "module": 0
+    },
+    "7": {
+      "kind": "watchdog",
+      "pos": [
+        350,
+        330
+      ],
+      "p": {
+        "name": "watchdog-7",
+        "dtype": "bit",
+        "invert": false,
+        "edge": "level",
+        "debounce": 0.0,
+        "on_delay": 0.0,
+        "off_delay": 0.0,
+        "initial": false,
+        "value": 0.0,
+        "expression": "x",
+        "global_io": false,
+        "hal_binding": null,
+        "timeout_ms": 1000.0,
+        "watch_mode": "both",
+        "latched": true,
+        "enabled": true
+      },
+      "module": 0
+    },
+    "8": {
+      "kind": "output",
+      "pos": [
+        730,
+        330
+      ],
+      "p": {
+        "name": "heartbeat-fault",
+        "dtype": "bit",
+        "invert": false,
+        "edge": "level",
+        "debounce": 0.0,
+        "on_delay": 0.0,
+        "off_delay": 0.0,
+        "initial": false,
+        "value": 0.0,
+        "expression": "x",
+        "global_io": false,
+        "hal_binding": null
+      },
+      "module": 0
+    }
+  },
+  "links": [
+    [
+      1,
+      "out",
+      2,
+      "in"
+    ],
+    [
+      2,
+      "out",
+      3,
+      "in"
+    ],
+    [
+      3,
+      "out",
+      4,
+      "in"
+    ],
+    [
+      4,
+      "out",
+      5,
+      "in"
+    ],
+    [
+      6,
+      "out",
+      7,
+      "trigger"
+    ],
+    [
+      7,
+      "fault",
+      8,
+      "in"
+    ]
+  ]
+}
